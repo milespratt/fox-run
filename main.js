@@ -6,6 +6,11 @@ import * as particles from "pixi-particles";
 
 import leafImage from "./leaf.png";
 
+import grassOne from "./images/grassOne.png";
+import grassTwo from "./images/grassTwo.png";
+import grassThree from "./images/grassThree.png";
+import grassFour from "./images/grassFour.png";
+
 import foxRun01 from "./images/foxRun1.png";
 import foxRun02 from "./images/foxRun2.png";
 import foxRun03 from "./images/foxRun3.png";
@@ -263,6 +268,95 @@ const leafContainer = new PIXI.Container();
 viewport.addChild(leafContainer);
 viewport.addChild(foxContainer);
 
+var grassEmitter = new particles.Emitter(
+  // The PIXI.Container to put the emitter in
+  // if using blend modes, it's important to put this
+  // on top of a bitmap, and not use the root stage Container
+  leafContainer,
+
+  // The collection of particle images to use
+  [
+    PIXI.Texture.from(grassOne),
+    PIXI.Texture.from(grassTwo),
+    PIXI.Texture.from(grassThree),
+    PIXI.Texture.from(grassFour),
+  ],
+
+  // Emitter configuration, edit this to change the look
+  // of the emitter
+  {
+    alpha: {
+      start: 1,
+      end: 1,
+    },
+    scale: {
+      start: 2,
+      end: 2,
+      minimumScaleMultiplier: 1,
+    },
+    color: {
+      start: "#ffffff",
+      end: "#ffffff",
+    },
+    speed: {
+      start: 200,
+      end: 200,
+      minimumSpeedMultiplier: 1,
+    },
+    acceleration: {
+      x: 0,
+      y: 0,
+    },
+    maxSpeed: 0,
+    startRotation: {
+      min: 180,
+      max: 180,
+    },
+    noRotation: false,
+    rotationSpeed: {
+      min: 0,
+      max: 0,
+    },
+    lifetime: {
+      min: 10,
+      max: 20,
+    },
+    blendMode: "normal",
+    ease: [
+      {
+        s: 0,
+        cp: 0.379,
+        e: 0.548,
+      },
+      {
+        s: 0.548,
+        cp: 0.717,
+        e: 0.676,
+      },
+      {
+        s: 0.676,
+        cp: 0.635,
+        e: 1,
+      },
+    ],
+    frequency: 0.01,
+    emitterLifetime: -1,
+    maxParticles: 1000,
+    pos: {
+      x: 0,
+      y: 0,
+    },
+    addAtBack: false,
+    spawnType: "rect",
+    spawnRect: {
+      x: window.innerWidth,
+      y: window.innerHeight - 4,
+      w: 20,
+      h: 1,
+    },
+  }
+);
+
 var emitter = new particles.Emitter(
   // The PIXI.Container to put the emitter in
   // if using blend modes, it's important to put this
@@ -360,6 +454,7 @@ var update = function () {
   // The emitter requires the elapsed
   // number of seconds since the last update
   emitter.update((now - elapsed) * 0.001);
+  grassEmitter.update((now - elapsed) * 0.001);
   elapsed = now;
 
   // Should re-render the PIXI Stage
@@ -368,6 +463,7 @@ var update = function () {
 
 // Start emitting
 emitter.emit = true;
+grassEmitter.emit = true;
 
 // Start the update
 update();
