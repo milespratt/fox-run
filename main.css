@@ -1,5 +1,7 @@
-html,body {
-height: 100%;
-margin: 0;
-background-color: #ebe4de;
+html,
+body {
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
+  background-color: #ebe4de;
 }

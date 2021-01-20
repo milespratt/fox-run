@@ -14,6 +14,7 @@
   "dependencies": {
     "images": "^3.2.3",
     "pixi-particles": "^4.3.0",
+    "pixi-sound": "^3.0.5",
     "pixi-viewport": "^4.18.1",
     "pixi.js": "^5.3.7"
   },
